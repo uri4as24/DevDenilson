@@ -1,0 +1,212 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 213 32% 10%;
+    --foreground: 210 40% 96%;
+
+    --card: 213 35% 13%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 213 35% 13%;
+    --popover-foreground: 210 40% 96%;
+
+    --primary: 197 100% 50%;
+    --primary-foreground: 213 32% 10%;
+
+    --secondary: 213 30% 18%;
+    --secondary-foreground: 210 40% 90%;
+
+    --muted: 213 25% 20%;
+    --muted-foreground: 213 15% 55%;
+
+    --accent: 185 80% 45%;
+    --accent-foreground: 213 32% 10%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 213 25% 22%;
+    --input: 213 25% 22%;
+    --ring: 197 100% 50%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 213 32% 10%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-primary: 197 100% 50%;
+    --sidebar-primary-foreground: 213 32% 10%;
+    --sidebar-accent: 213 30% 18%;
+    --sidebar-accent-foreground: 210 40% 90%;
+    --sidebar-border: 213 25% 22%;
+    --sidebar-ring: 197 100% 50%;
+
+    /* Custom tokens */
+    --glass: 213 35% 15%;
+    --glass-border: 213 25% 28%;
+    --glow-primary: 197 100% 50%;
+    --glow-accent: 185 80% 45%;
+    --navy-light: 213 28% 25%;
+    --gradient-start: 197 100% 50%;
+    --gradient-end: 185 80% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: "Inter", sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Space Grotesk", sans-serif;
+  }
+}
+
+@layer utilities {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .container {
+      max-width: 1400px;
+    }
+  }
+
+  .glass {
+    @apply bg-card/60 backdrop-blur-xl border border-glass-border/30;
+  }
+
+  .glass-strong {
+    @apply bg-card/80 backdrop-blur-2xl border border-glass-border/40;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+  }
+
+  .gradient-border {
+    position: relative;
+  }
+
+  .gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary)),
+      hsl(var(--accent))
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+  }
+
+  .gradient-border:hover::before {
+    opacity: 1;
+  }
+
+  .glow {
+    box-shadow:
+      0 0 20px hsl(var(--primary) / 0.15),
+      0 0 40px hsl(var(--primary) / 0.05);
+  }
+
+  .glow-strong {
+    box-shadow:
+      0 0 30px hsl(var(--primary) / 0.25),
+      0 0 60px hsl(var(--primary) / 0.1);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .gradient-btn {
+    @apply relative overflow-hidden;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary)),
+      hsl(var(--accent))
+    );
+  }
+
+  .gradient-btn::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -100%;
+    width: 60%;
+    height: 200%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.15),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  .gradient-btn:hover::after {
+    left: 120%;
+  }
+
+  .section-padding {
+    @apply py-20 md:py-28 px-4 md:px-8;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.5);
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
